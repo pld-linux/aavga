@@ -2,7 +2,7 @@ Summary:	Simple svgalib dropin replacement that utilizes aalib
 Summary(pl):	Prosta biblioteka zastêpuj±ca svgalib, oparta o aalib
 Name:		aavga
 Version:	1.0rc1
-Release:	2
+Release:	3
 License:	GPL
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/aa-project/%{name}-%{version}.tar.gz
