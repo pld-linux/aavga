@@ -6,6 +6,7 @@ Release:	1
 License:	GPL
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/aa-project/%{name}-%{version}.tar.gz
+# Source0-md5:	75c7c0be6d22ef52768568d5ec5c5c05
 Patch0:		%{name}-update.patch
 URL:		http://aa-project.sourceforge.net/aavga/
 BuildRequires:	aalib-devel
