@@ -24,7 +24,7 @@ art library. Allows squake to run in text mode.
 Prosta biblioteka zastêpuj±ca svgalib, odwo³uj±ca siê do aalib -
 biblioteki wy¶wietlaj±cej grafikê jako ascii art. aavga pozwala
 uruchamiaæ programy korzystaj±ce z svgalib w trybie tekstowym.
-				
+
 %prep
 %setup -q -n %{name}-1.0
 %patch -p1
