@@ -1,0 +1,112 @@
+diff -Nur aavga-1.0.orig/aavga.c aavga-1.0/aavga.c
+--- aavga-1.0.orig/aavga.c	Mon Feb 12 23:35:30 2001
++++ aavga-1.0/aavga.c	Sat Jun 23 20:15:59 2001
+@@ -58,9 +58,10 @@
+   { 320, 400, 1, 256, 320, 320, 0, 320 * 400, 0, IS_LINEAR, 0, 320 * 400, 0, NULL, 1024 * 1024, NULL, NULL } ,				/*7 */
+   { 360, 480, 1, 256, 360, 360, 0, 260 * 480, 0, IS_LINEAR, 0, 360 * 480, 0, NULL, 1024 * 1024, NULL, NULL } ,				/*8 */
+   { 0, 0 } ,				/*9 */
+-  { 640, 480, 1, 256, 640, 480, 0, 640 * 480, 0, IS_LINEAR, 0, 640 * 480, 0, NULL, 1024 * 1024, NULL, NULL } ,				/*11 */
+-  { 800, 600, 1, 256, 800, 600, 0, 800 * 600, 0, IS_LINEAR, 0, 800 * 600, 0, NULL, 1024 * 1024, NULL, NULL } ,				/*12 */
+-  { 1024, 768, 1, 256, 1024, 768, 0, 1024 * 768, 0, IS_LINEAR, 0, 1024*768, 0, NULL, 1024 * 1024, NULL, NULL } ,				/*13 */
++  { 640, 480, 1, 256, 640, 480, 0, 640 * 480, 0, IS_LINEAR, 0, 640 * 480, 0, NULL, 1024 * 1024, NULL, NULL } ,				/*10 */
++  { 800, 600, 1, 256, 800, 600, 0, 800 * 600, 0, IS_LINEAR, 0, 800 * 600, 0, NULL, 1024 * 1024, NULL, NULL } ,				/*11 */
++  { 1024, 768, 1, 256, 1024, 768, 0, 1024 * 768, 0, IS_LINEAR, 0, 1024*768, 0, NULL, 1024 * 1024, NULL, NULL } ,				/*12 */
++  { 1280, 1024, 1, 256, 1280, 1024, 0, 1280 * 1024, 0, IS_LINEAR, 0, 1280*1024, 0, NULL, 2048 * 1024, NULL, NULL } ,				/*13 */
+ 
+ };
+ #define MAXMODE 13
+@@ -92,7 +93,8 @@
+ vga_setmode (int x)
+ {
+   int initialized = 0;
+-  fprintf (stderr, " AA-lib SVGA emulation mode:%i\n", x);
++  if(debug)
++    fprintf (stderr, " AA-lib SVGA emulation mode:%i\n", x);
+   aa_parseoptions (NULL, NULL, NULL, NULL);
+   cmode = x;
+   if (x == 0 && context)
+@@ -115,7 +117,8 @@
+ 	    if (!aa_autoinitmouse (context, AA_SENDRELEASE))
+ 	      return fprintf (stderr, "Error in aa_autoinitmouse!\n"), 1;
+ 	    }
+-	    fprintf (stderr, " AA-lib initialized\n");
++	    if(debug)
++	      fprintf (stderr, " AA-lib initialized\n");
+ 	    return 0;
+ 	  }
+ 	else
+@@ -648,4 +651,74 @@
+       pos1 += pitch;
+       pos2 += vpitch;
+     }
++}
++
++/* svgalib >= 1.2.11 functions */
++static char*
++_aavga_modenamestab[]={
++"","","","","",
++"G320x200x256",
++"G320x240x256",
++"G320x400x256",
++"G360x480x256",
++"",
++"G640x480x256",
++"G800x600x256",
++"G1024x768x256",
++"G1280x1024x256"};
++#define _aavga_modenum (sizeof(_aavga_modenamestab)/sizeof(char*))
++char *
++vga_getmodename(int mode)
++{
++  if(mode>=_aavga_modenum)
++    return "";
++  return _aavga_modenamestab[mode];
++}
++
++int
++vga_runinbackground_version(void)
++{
++  return 0;
++}
++
++int
++vga_clear(void)
++{
++  memset(buffer,0,mode[cmode].maxpixels);
++  return 0;
++}
++
++int
++vga_drawscansegment(unsigned char *colors, int x, int y, int length)
++{
++  memcpy(buffer+y*mode[cmode].width+x,colors,length);
++  return 0;
++}
++
++int
++vga_drawscanline(int line, unsigned char *color)
++{
++  return vga_drawscansegment(color,0,line,mode[cmode].width);
++}
++
++void
++vga_lockvc(void) {}
++void
++vga_unlockvc(void) {}
++void
++vga_disabledriverreport(void) {}
++
++/* svgalib >= 1.3.0 functions */
++int vga_getdefaultmode(void)
++{ int m;
++  char *ms;
++  if((ms=getenv("SVGALIB_DEFAULT_MODE"))==NULL)
++    return -1;
++  if(ms[0]=='G') {
++    for(m=0;m<_aavga_modenum;m++)
++      if(!strcmp(ms,_aavga_modenamestab[m]))
++	return m;
++    return -1;
++  } else
++    return atoi(ms)>0 ? atoi(ms) : -1;
+ }
