@@ -5,12 +5,12 @@ Version:	1.0rc1
 Release:	1
 License:	GPL
 Group:		Libraries
-Source0:	ftp://download.sourceforge.net/pub/sourceforge/aa-project/%{name}-%{version}.tar.gz
+Source0:	http://dl.sourceforge.net/aa-project/%{name}-%{version}.tar.gz
 Patch0:		%{name}-update.patch
 URL:		http://aa-project.sourceforge.net/aavga/
 BuildRequires:	aalib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-# note: no obsoletes for svgalib - vgagl.so.1 and may be useful
+# note: no obsoletes for svgalib - vgagl.so.1 may be useful
 
 %description
 Drop-in replacement for svgalib to wrap around aa, a wonderful ascii
