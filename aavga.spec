@@ -24,7 +24,7 @@ uruchamiaæ programy korzystaj±ce z svgalib w trybie tekstowym.
 
 %prep
 %setup -q -n %{name}-1.0
-%patch -p1
+%patch0 -p1
 
 %build
 %{__cc} aavga.c -Wl,-soname,libvga.so.1 -o libvga.so.1.99.1 \
