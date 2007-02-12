@@ -1,5 +1,5 @@
 Summary:	Simple svgalib dropin replacement that utilizes aalib
-Summary(pl.UTF-8):   Prosta biblioteka zastępująca svgalib, oparta o aalib
+Summary(pl.UTF-8):	Prosta biblioteka zastępująca svgalib, oparta o aalib
 Name:		aavga
 Version:	1.0rc1
 Release:	3
