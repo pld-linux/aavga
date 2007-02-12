@@ -1,5 +1,5 @@
 Summary:	Simple svgalib dropin replacement that utilizes aalib
-Summary(pl):	Prosta biblioteka zastêpuj±ca svgalib, oparta o aalib
+Summary(pl.UTF-8):   Prosta biblioteka zastÄ™pujÄ…ca svgalib, oparta o aalib
 Name:		aavga
 Version:	1.0rc1
 Release:	3
@@ -17,10 +17,10 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Drop-in replacement for svgalib to wrap around aa, a wonderful ascii
 art library. Allows squake to run in text mode.
 
-%description -l pl
-Prosta biblioteka zastêpuj±ca svgalib, odwo³uj±ca siê do aalib -
-biblioteki wy¶wietlaj±cej grafikê jako ascii art. aavga pozwala
-uruchamiaæ programy korzystaj±ce z svgalib w trybie tekstowym.
+%description -l pl.UTF-8
+Prosta biblioteka zastÄ™pujÄ…ca svgalib, odwoÅ‚ujÄ…ca siÄ™ do aalib -
+biblioteki wyÅ›wietlajÄ…cej grafikÄ™ jako ascii art. aavga pozwala
+uruchamiaÄ‡ programy korzystajÄ…ce z svgalib w trybie tekstowym.
 
 %prep
 %setup -q -n %{name}-1.0
