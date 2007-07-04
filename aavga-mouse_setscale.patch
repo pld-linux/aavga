@@ -1,0 +1,15 @@
+--- aavga-1.0/aavga.c.old	2007-07-04 18:44:56.000000000 +0200
++++ aavga-1.0/aavga.c	2007-07-04 18:46:18.000000000 +0200
+@@ -639,6 +639,12 @@
+   if (debug)
+     fprintf (stderr, "AA-VGA: setposition\n");
+ }
++void
++mouse_setscale(int s)
++{
++  if (debug)
++    fprintf (stderr, "AA-VGA: setscale\n");
++}
+ void 
+ vga_copytoplanar256 (char *v, int pitch, int voffset, int vpitch, int w, int h)
+ {
